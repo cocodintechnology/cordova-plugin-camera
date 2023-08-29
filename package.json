@@ -1,6 +1,7 @@
 {
-  "name": "cordova-plugin-camera",
-  "version": "6.0.0",
+  "name": "@cocodintech/cordova-plugin-camera",
+  "version": "1.0.1",
+  "private": false,
   "description": "Cordova Camera Plugin",
   "types": "./types/index.d.ts",
   "cordova": {
@@ -13,8 +14,7 @@
       "osx"
     ]
   },
-  "repository": "github:apache/cordova-plugin-camera",
-  "bugs": "https://github.com/apache/cordova-plugin-camera/issues",
+  "repository": "cocodintechnology/cordova-plugin-camera",
   "keywords": [
     "cordova",
     "camera",
