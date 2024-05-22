@@ -30,8 +30,8 @@
     <issue>https://github.com/apache/cordova-plugin-camera/issues</issue>
 
     <engines>
-        <engine name="cordova" version=">=9.0.0"/>
-        <engine name="cordova-android" version=">=10.0.0" />
+        <engine name="cordova" version=">=9.0.0" />
+        <engine name="cordova-android" version=">=12.0.0" />
         <engine name="cordova-ios" version=">=5.1.0" />
     </engines>
 
@@ -51,87 +51,86 @@
     <platform name="android">
         <config-file target="res/xml/config.xml" parent="/*">
             <feature name="Camera">
-                <param name="android-package" value="org.apache.cordova.camera.CameraLauncher"/>
+                <param name="android-package" value="org.apache.cordova.camera.CameraLauncher" />
             </feature>
         </config-file>
         <config-file target="AndroidManifest.xml" parent="/*">
-            <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
             <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
+            <uses-permission android:name="android.permission.READ_MEDIA_VIDEO" />
         </config-file>
         <config-file target="AndroidManifest.xml" parent="application">
-          <provider
-              android:name="org.apache.cordova.camera.FileProvider"
-              android:authorities="${applicationId}.cordova.plugin.camera.provider"
-              android:exported="false"
-              android:grantUriPermissions="true" >
-              <meta-data
-                  android:name="android.support.FILE_PROVIDER_PATHS"
-                  android:resource="@xml/camera_provider_paths"/>
-          </provider>
+            <provider
+                android:name="org.apache.cordova.camera.FileProvider"
+                android:authorities="${applicationId}.cordova.plugin.camera.provider"
+                android:exported="false"
+                android:grantUriPermissions="true">
+                <meta-data
+                    android:name="android.support.FILE_PROVIDER_PATHS"
+                    android:resource="@xml/camera_provider_paths" />
+            </provider>
         </config-file>
 
-        <config-file target="AndroidManifest.xml" parent="/*">
-            <queries>
-                <intent>
-                    <action android:name="android.media.action.IMAGE_CAPTURE" />
-                </intent>
-                <intent>
-                    <action android:name="android.intent.action.GET_CONTENT" />
-                </intent>
-                <intent>
-                    <action android:name="android.intent.action.PICK" />
-                </intent>
-                <intent>
-                    <action android:name="com.android.camera.action.CROP" />
-                    <data android:scheme="content" android:mimeType="image/*"/>
-                </intent>
-            </queries>
+        <config-file target="AndroidManifest.xml" parent="queries">
+            <intent>
+                <action android:name="android.media.action.IMAGE_CAPTURE" />
+            </intent>
+            <intent>
+                <action android:name="android.intent.action.GET_CONTENT" />
+            </intent>
+            <intent>
+                <action android:name="android.intent.action.PICK" />
+            </intent>
+            <intent>
+                <action android:name="com.android.camera.action.CROP" />
+                <data android:scheme="content" android:mimeType="image/*" />
+            </intent>
         </config-file>
 
-        <source-file src="src/android/CameraLauncher.java" target-dir="src/org/apache/cordova/camera" />
+        <source-file src="src/android/CameraLauncher.java"
+            target-dir="src/org/apache/cordova/camera" />
         <source-file src="src/android/FileHelper.java" target-dir="src/org/apache/cordova/camera" />
         <source-file src="src/android/ExifHelper.java" target-dir="src/org/apache/cordova/camera" />
         <source-file src="src/android/FileProvider.java" target-dir="src/org/apache/cordova/camera" />
         <source-file src="src/android/GalleryPathVO.java" target-dir="src/org/apache/cordova/camera" />
         <source-file src="src/android/xml/camera_provider_paths.xml" target-dir="res/xml" />
 
-        <preference name="ANDROIDX_CORE_VERSION" default="1.6.+"/>
+        <preference name="ANDROIDX_CORE_VERSION" default="1.6.+" />
         <framework src="androidx.core:core:$ANDROIDX_CORE_VERSION" />
 
         <js-module src="www/CameraPopoverHandle.js" name="CameraPopoverHandle">
             <clobbers target="CameraPopoverHandle" />
-          </js-module>
-      </platform>
+        </js-module>
+    </platform>
 
-     <!-- ios -->
-     <platform name="ios">
-         <config-file target="config.xml" parent="/*">
-             <feature name="Camera">
-                 <param name="ios-package" value="CDVCamera" />
-             </feature>
-             <preference name="CameraUsesGeolocation" value="false" />
-         </config-file>
+    <!-- ios -->
+    <platform name="ios">
+        <config-file target="config.xml" parent="/*">
+            <feature name="Camera">
+                <param name="ios-package" value="CDVCamera" />
+            </feature>
+            <preference name="CameraUsesGeolocation" value="false" />
+        </config-file>
 
-         <js-module src="www/ios/CameraPopoverHandle.js" name="CameraPopoverHandle">
+        <js-module src="www/ios/CameraPopoverHandle.js" name="CameraPopoverHandle">
             <clobbers target="CameraPopoverHandle" />
-         </js-module>
+        </js-module>
 
-         <header-file src="src/ios/UIImage+CropScaleOrientation.h" />
-         <source-file src="src/ios/UIImage+CropScaleOrientation.m" />
-         <header-file src="src/ios/CDVCamera.h" />
-         <source-file src="src/ios/CDVCamera.m" />
-         <header-file src="src/ios/CDVJpegHeaderWriter.h" />
-         <source-file src="src/ios/CDVJpegHeaderWriter.m" />
-         <header-file src="src/ios/CDVExif.h" />
-         <framework src="ImageIO.framework" weak="true" />
-         <framework src="CoreLocation.framework" />
-         <framework src="CoreGraphics.framework" />
-         <framework src="AssetsLibrary.framework" />
-         <framework src="MobileCoreServices.framework" />
-         <framework src="CoreGraphics.framework" />
-         <framework src="AVFoundation.framework" />
+        <header-file src="src/ios/UIImage+CropScaleOrientation.h" />
+        <source-file src="src/ios/UIImage+CropScaleOrientation.m" />
+        <header-file src="src/ios/CDVCamera.h" />
+        <source-file src="src/ios/CDVCamera.m" />
+        <header-file src="src/ios/CDVJpegHeaderWriter.h" />
+        <source-file src="src/ios/CDVJpegHeaderWriter.m" />
+        <header-file src="src/ios/CDVExif.h" />
+        <framework src="ImageIO.framework" weak="true" />
+        <framework src="CoreLocation.framework" />
+        <framework src="CoreGraphics.framework" />
+        <framework src="AssetsLibrary.framework" />
+        <framework src="MobileCoreServices.framework" />
+        <framework src="CoreGraphics.framework" />
+        <framework src="AVFoundation.framework" />
 
-     </platform>
+    </platform>
 
     <!-- browser -->
     <platform name="browser">
@@ -144,38 +143,6 @@
         <js-module src="src/browser/CameraProxy.js" name="CameraProxy">
             <runs />
         </js-module>
-    </platform>
-
-    <!-- windows -->
-    <platform name="windows">
-        <config-file target="package.appxmanifest" parent="/Package/Capabilities">
-            <DeviceCapability Name="webcam" />
-        </config-file>
-        <js-module src="www/CameraPopoverHandle.js" name="CameraPopoverHandle">
-            <clobbers target="CameraPopoverHandle" />
-        </js-module>
-        <js-module src="src/windows/CameraProxy.js" name="CameraProxy">
-            <runs />
-        </js-module>
-    </platform>
-
-    <!-- osx -->
-    <platform name="osx">
-        <config-file target="config.xml" parent="/*">
-            <feature name="Camera">
-                <param name="osx-package" value="CDVCamera"/>
-            </feature>
-        </config-file>
-
-        <js-module src="www/CameraPopoverHandle.js" name="CameraPopoverHandle">
-            <clobbers target="CameraPopoverHandle" />
-        </js-module>
-
-        <header-file src="src/osx/CDVCamera.h" />
-        <source-file src="src/osx/CDVCamera.m" />
-
-        <framework src="Quartz.framework" />
-        <framework src="AppKit.framework" />
     </platform>
 
 </plugin>

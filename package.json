@@ -1,29 +1,25 @@
 {
   "name": "@cocodintech/cordova-plugin-camera",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "private": false,
   "description": "Cordova Camera Plugin",
   "types": "./types/index.d.ts",
   "cordova": {
-    "id": "@cocodintech/cordova-plugin-camera",
+    "id": "cordova-plugin-camera",
     "platforms": [
       "android",
       "ios",
-      "browser",
-      "windows",
-      "osx"
+      "browser"
     ]
   },
   "repository": "https://github.com/cocodintechnology/cordova-plugin-camera",
+  "bugs": "https://github.com/apache/cordova-plugin-camera/issues",
   "keywords": [
     "cordova",
     "camera",
     "ecosystem:cordova",
     "cordova-android",
-    "cordova-ios",
-    "cordova-browser",
-    "cordova-windows",
-    "cordova-osx"
+    "cordova-ios"
   ],
   "scripts": {
     "test": "npm run lint",
@@ -35,6 +31,6 @@
     "cordova-android": ">=10.0.0 <=12.0.0"
   },
   "devDependencies": {
-    "@cordova/eslint-config": "^3.0.0"
+    "@cordova/eslint-config": "^5.0.0"
   }
 }
